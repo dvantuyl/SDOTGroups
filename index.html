@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>SDOTGroups</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+	      <link href="style.css" rel="stylesheet" type="text/css" />
+     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer>
+     </script>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js">
+
+     </script>
+     <script src="script.js">
+     </script>
+</head>
+
+<body class="bg-purple-100 flex align-center justify-center h-screen">
+	<main x-data="data()" x-init="init()" class="flex flex-col mw-64 bg-white m-8 rounded-lg p-3 shadow-md">
+
+    <!-- INPUT -->
+		<form class="flex-none">
+			<div class="flex flex-wrap">
+				<label class="block m-2 text-blue-800">
+          <span class="font-semibold">Number of people:</span>
+          <input x-model:value="numPeople"
+            @click="numPeople = null" 
+            @click.away="numPeople == null ? numPeople = 0 : true" 
+            class="mx-1 px-2 w-16 bg-gray-200"
+            type="number" 
+          >
+        </label>
+        <label class="block m-2 text-blue-800">
+          <span class="font-semibold">Groups of:</span>
+          <input x-model:value="groupsOf" 
+            @click="groupsOf = null" 
+            @click.away="groupsOf == null ? groupsOf = 0 : true" 
+            class="mx-1 px-2 w-16 bg-gray-200"
+            type="number" 
+          >
+        </label>
+      </div>
+      <label class="block m-2 text-blue-800 block">
+        <span class="font-semibold">Your favorite mythical animal:</span>
+        <input x-model:value="seed" 
+          @click="seed = null" 
+          class="mx-1 px-2 w-40 bg-gray-200"
+          type="text"
+        >
+      </label>
+      <button @click="generate($event)" 
+        class="bg-blue-500 hover:bg-blue-400 text-white block px-2 rounded-md my-4 h-8 w-full font-semibold"
+      >
+        Generate
+      </button>
+    </form>
+
+    <!-- OUTPUT -->
+    <ul class="overflow-auto flex-1 mt-3">
+      <template x-for="group in groups">
+        <li :class="{'bg-pink-200': group.over }" class="p-1 m-2">
+          <span x-text="group.display" class="text-blue-800 font-semibold text-2xl" ></group>
+        </li>
+      </template>
+    </ul>
+  </main>
+</body>
+</html>
